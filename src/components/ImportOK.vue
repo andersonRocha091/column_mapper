@@ -54,9 +54,9 @@ export default {
     const headers = ref([]);
     const data = ref([]);
     const defaultHeaderSets = ref([
-      { name: 'Customer', headers: ['Id', 'Nome', 'email', 'telefone', 'endereco'] },
-      { name: 'Product', headers: ['Id', 'Produto', 'preço', 'quantidade', 'categoria'] },
-      { name: 'Sell', headers: ['Id', 'Venda', 'valor', 'data', 'cliente'] },
+      { name: 'Cliente', headers: ['Id', 'Nome', 'email', 'telefone', 'endereco'] },
+      { name: 'Produto', headers: ['Id', 'Produto', 'preço', 'quantidade', 'categoria'] },
+      { name: 'Venda', headers: ['Id', 'Venda', 'valor', 'data', 'cliente'] },
     ]);
     const selectedDefaultHeaderSet = ref([]);
     const defaultHeaders = ref([]);
