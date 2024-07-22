@@ -99,9 +99,8 @@ export default {
         const sheetName = workBook.SheetNames[0];
         const workSheet = workBook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(workSheet, { header: 1 });
-
-        headers.value = json[0];
-        data.value = json.slice(1);
+        headers.value = json[1];
+        data.value = json.slice(2);
 
         updateMappings();
       };
