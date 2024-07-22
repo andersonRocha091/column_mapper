@@ -54,9 +54,24 @@ export default {
     const headers = ref([]);
     const data = ref([]);
     const defaultHeaderSets = ref([
-      { name: 'Cliente', headers: ['Id', 'Nome', 'email', 'telefone', 'endereco'] },
-      { name: 'Produto', headers: ['Id', 'Produto', 'preço', 'quantidade', 'categoria'] },
-      { name: 'Venda', headers: ['Id', 'Venda', 'valor', 'data', 'cliente'] },
+      { name: 'Cliente', headers: ['ID do Cliente', 'Dia de vencimento', 'Razão social ou Nome completo', 'Nome fantasia', 'Pronuncia','Data de nascimento ou fundacao'
+      ,'CNPJ','CPF','RG', 'Orgao expedidor','E-mail de financeiro','E-mail de recado','Telefone','Celular','DDR','Ramal exclusivo','Caixa postal',
+      'Rua','Numero','Complemento','Bairro', 'CEP','Cidade','Estado(UF)','Pais','Rua de correspondencia','Numero de correspondencia', 'Complemento de correspondencia',
+      'Bairro de correspondencia','CEP de correspondencia', 'Cidade de correspondencia','Cidade de correspondencia','Estado (UF) de correspondencia',
+      'Passaporte', 'Multa por atraso%','Juros por dia%','Dias de atraso para bloqueio','Rententor ISS','Inscricao Municipal','Inscricao Estadual',
+      'Site','Ramo de atividade','Observacoes','Apresentacao','Descricao de produtos e servicos','Profissao', 'Estado civil','Data de nascimento', 'ID da Unidade'] },
+      { name: 'Pessoa', headers: ['ID do Cliente', 'Nome', 'Assina pela empresa?', 'E-mail', 'Telefone','Celular','Ramal exclusivo','Pode retirar correspondência?',
+        'Rua','Numero','Complemento','Bairro','CEP','Estado','Pais','RG','Órgão Expedidor','CPF','Data de nascimento','Sexo','Estado Civil','Nacionalidade',
+        'Naturalidade','Passaporte','Observacoes','Profissao','Cargo','Ativo','ID da Unidade'
+      ] },
+      { name: 'Fornecedor', headers: ['Nome ou Nome Fantasia', 'Razão social', 'CNPJ', 'CPF', 'RG','Orgao expedidor','Celular','Telefone','E-mails',
+        'Rua','Numero','Complemento','Bairro','CEP','Cidade','Estado (UF)','Inscricao Municipal','Inscricao Estadual','Site','Ramo de atividade',
+        'Pessoas de contato','Observacoes','Data de cadastro']},
+      { name: 'Contrato', headers: ['ID', 'ID CLIENTE', 'ID DO PLANO', 'NOME DO PLANO PERSONALIZADO', 'PERIODICIDADE DO PAGAMENTO', 'DATA DE INÍCIO',
+        'DATA DE ENCERRAMENTO','DATA DA FIDELIDADE','DESCRIÇÃO RESUMIDA DO CONTRATO','OBSERVACOES','ID DA SALA PRIVATIVA','VALOR ORIGINAL','VALOR FINAL',
+        'USAR PRO RATA','GERAR VENDAS A PARTIR DE','VALOR DA TAXA DE ADESAO','DESCONTO EM SALAS (%)','DESCONTO EM ESTAÇÕES DE TRABALHO (%)','QTD LIMITE DE ATENDIMENTOS',
+        'PRECO POR ATENDIMENTO ADICIONAL','HABILITAR ENVIO DE SMS','ID DO CENTRO DE CUSTO','ID DA CATEGORIA DE SERVIÇO','ID DA UNIDADE'
+      ] },
     ]);
     const selectedDefaultHeaderSet = ref([]);
     const defaultHeaders = ref([]);
