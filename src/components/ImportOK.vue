@@ -59,7 +59,7 @@ export default {
       'Rua','Numero','Complemento','Bairro', 'CEP','Cidade','Estado(UF)','Pais','Rua de correspondencia','Numero de correspondencia', 'Complemento de correspondencia',
       'Bairro de correspondencia','CEP de correspondencia', 'Cidade de correspondencia','Cidade de correspondencia','Estado (UF) de correspondencia',
       'Passaporte', 'Multa por atraso%','Juros por dia%','Dias de atraso para bloqueio','Rententor ISS','Inscricao Municipal','Inscricao Estadual',
-      'Site','Ramo de atividade','Observacoes','Apresentacao','Descricao de produtos e servicos','Profissao', 'Estado civil','Data de nascimento', 'ID da Unidade'] },
+      'Site','Ramo de atividade','Observacoes','Apresentacao','Descricao de produtos e servicos','Tratamento','Orientacao para atendimento','Profissao', 'Estado civil','Data de nascimento', 'Data do cadastro','ID da Unidade']},
       { name: 'Pessoa', headers: ['ID do Cliente', 'Nome', 'Assina pela empresa?', 'E-mail', 'Telefone','Celular','Ramal exclusivo','Pode retirar correspondência?',
         'Rua','Numero','Complemento','Bairro','CEP','Estado','Pais','RG','Órgão Expedidor','CPF','Data de nascimento','Sexo','Estado Civil','Nacionalidade',
         'Naturalidade','Passaporte','Observacoes','Profissao','Cargo','Ativo','ID da Unidade'
@@ -99,8 +99,8 @@ export default {
         const sheetName = workBook.SheetNames[0];
         const workSheet = workBook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(workSheet, { header: 1 });
-        headers.value = json[1];
-        data.value = json.slice(2);
+        headers.value = json[0];
+        data.value = json.slice(1);
 
         updateMappings();
       };
