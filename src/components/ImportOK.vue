@@ -43,6 +43,7 @@
                   </select>
                 </div>
               </div>
+              <button class="btn btn-custom mt-4" @click="downloadMappedFile">Baixar Arquivo</button>
             </div>
           </div>
         </div>
