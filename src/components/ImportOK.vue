@@ -16,35 +16,20 @@
               />
               <label for="fileUpload" class="custom-file-label">{{fileName || 'Carregar Arquivo'}}</label>
             </div>
-             <div v-if="defaultHeaderSets.length" class="form-group mb-4">
-                <label for="defaultHeadersSelect" class="font-weight-bold text-dark">Selecionar Modelo</label>
-                <select
-                  id="defaultHeadersSelect"
-                  v-model="selectedDefaultHeaderSet"
-                  class="form-control custom-select shadow-sm"
-                  @change="updateDefaultHeaders"
-                >
-                  <option value="" disabled selected>Selecione um modelo</option>
-                  <option v-for="(set, index) in defaultHeaderSets" :key="index" :value="set">
-                    {{ set.name }}
-                  </option>
-                </select>
-            </div>
-             <div v-if="headers.length" class="mt-4">
-              <h3 class="text-center mb-4 font-weight-bold">Mapear Colunas</h3>
-              <div v-for="(header, index) in headers" :key="index" class="form-group row align-items-center mb-3">
-                <label class="col-sm-3 col-form-label font-weight-semibold">{{ header }}</label>
-                <div class="col-sm-9">
-                  <select v-model="mappings[header]" class="form-control custom-select shadow-sm">
-                    <option value="" disabled>Selecione uma coluna padrão</option>
-                    <option v-for="defaultHeader in defaultHeaders" :key="defaultHeader" :value="defaultHeader">
-                      {{ defaultHeader }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <button class="btn btn-custom mt-4" @click="downloadMappedFile">Baixar Arquivo</button>
-            </div>
+            <HeaderSelect
+              v-if="defaultHeaderSets.length"
+              :default-header-sets="defaultHeaderSets" 
+              :selected-default-header-set="selectedDefaultHeaderSet" 
+              @header-set-change="updateDefaultHeaders"
+            />
+            <ColumnMapping 
+              :headers="headers" 
+              :default-headers="defaultHeaders" 
+              :mappings="mappings"
+              :data="data"
+              @download-mapped-file="downloadMappedFile"
+              @update-mapping="handleUpdateMappings"
+            />
           </div>
         </div>
       </div>
@@ -54,8 +39,14 @@
 <script>
 import { ref, reactive, watch } from 'vue';
 import * as XLSX from 'xlsx';
+import HeaderSelect from './HeaderSelect';
+import ColumnMapping from './ColumnMapping';
 
 export default {
+  components: {
+    HeaderSelect,
+    ColumnMapping
+  },
   setup() {
     const headers = ref([]);
     const data = ref([]);
@@ -115,8 +106,11 @@ export default {
       reader.readAsArrayBuffer(file);
     };
 
-    const downloadMappedFile = () => {
+    const handleUpdateMappings = ({header, value}) => {
+      mappings[header] = value
+    }
 
+    const downloadMappedFile = () => {
       const mappedData = data.value.map(row => {
         const newRow = {};
         headers.value.forEach((originalHeader, index) => {
@@ -139,9 +133,9 @@ export default {
       XLSX.writeFile(newWorkbook, 'importacao_mapeada.xlsx');
     };
 
-     const updateDefaultHeaders = () => {
+     const updateDefaultHeaders = (SelectedHeader) => {
         const selectedSet = defaultHeaderSets.value.find(set => {
-        return set.name === selectedDefaultHeaderSet.value.name
+        return set.name === SelectedHeader.name
       });
       if (selectedSet) {
         defaultHeaders.value = selectedSet.headers;
@@ -160,7 +154,8 @@ export default {
       selectedDefaultHeaderSet,
       downloadMappedFile,
     updateDefaultHeaders,
-      updateMappings
+      updateMappings,
+      handleUpdateMappings
     };
   }
 };
