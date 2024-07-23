@@ -1,50 +1,55 @@
 <template>
   <div class="container mt-5">
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2">
-        <h2 class="text-center">Importação e mapeamento de colunas</h2>
-        <div class="form-group mb-4">
-          <label for="fileUpload">Carregar Arquivo</label>
-          <input
-            type="file"
-            id="fileUpload"
-            class="form-control-file"
-            @change="handleFileUpload"
-          />
-        </div>
-        <div v-if="defaultHeaderSets.length" class="form-group mb-4">
-          <label for="defaultHeadersSelect">Selecionar Modelo</label>
-          <select
-            id="defaultHeadersSelect"
-            v-model="selectedDefaultHeaderSet"
-            class="form-control custom-select"
-            @change="updateDefaultHeaders"
-          >
-            <option v-for="(set, index) in defaultHeaderSets" :key="index" :value="set">
-              {{ set.name }}
-            </option>
-          </select>
-        </div>
-        <div v-if="headers.length" class="mt-4">
-          <h3 class="text-center">Mapear Colunas</h3>
-          <div v-for="(header, index) in headers" :key="index" class="form-group row align-items-center mb-3">
-            <label class="col-sm-2 col-form-label text-grey">{{ header }}</label>
-            <div class="col-sm-10">
-              <select v-model="mappings[header]" class="form-control custom-select">
-                <option value="" disabled>Selecione uma coluna padrão</option>
-                <option v-for="defaultHeader in defaultHeaders" :key="defaultHeader" :value="defaultHeader">
-                  {{ defaultHeader }}
-                </option>
-              </select>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-header bg-custom text-light text-center py-4 rounded-top shadow-lg">
+            <h2 class="font-weight-bold mb-0">Importação e mapeamento de colunas</h2>
+          </div>
+          <div class="card-body">
+            <div class="form-group mb-4 custom-file">
+              <input
+                type="file"
+                id="fileUpload"
+                class="custom-file-input"
+                @change="handleFileUpload"
+              />
+              <label for="fileUpload" class="custom-file-label">{{fileName || 'Carregar Arquivo'}}</label>
+            </div>
+             <div v-if="defaultHeaderSets.length" class="form-group mb-4">
+                <label for="defaultHeadersSelect" class="font-weight-bold text-dark">Selecionar Modelo</label>
+                <select
+                  id="defaultHeadersSelect"
+                  v-model="selectedDefaultHeaderSet"
+                  class="form-control custom-select shadow-sm"
+                  @change="updateDefaultHeaders"
+                >
+                  <option value="" disabled selected>Selecione um modelo</option>
+                  <option v-for="(set, index) in defaultHeaderSets" :key="index" :value="set">
+                    {{ set.name }}
+                  </option>
+                </select>
+            </div>
+             <div v-if="headers.length" class="mt-4">
+              <h3 class="text-center mb-4 font-weight-bold">Mapear Colunas</h3>
+              <div v-for="(header, index) in headers" :key="index" class="form-group row align-items-center mb-3">
+                <label class="col-sm-3 col-form-label font-weight-semibold">{{ header }}</label>
+                <div class="col-sm-9">
+                  <select v-model="mappings[header]" class="form-control custom-select shadow-sm">
+                    <option value="" disabled>Selecione uma coluna padrão</option>
+                    <option v-for="defaultHeader in defaultHeaders" :key="defaultHeader" :value="defaultHeader">
+                      {{ defaultHeader }}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
-          <button class="btn btn-custom mt-4" @click="downloadMappedFile">Baixar Arquivo</button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import { ref, reactive, watch } from 'vue';
 import * as XLSX from 'xlsx';
@@ -53,6 +58,7 @@ export default {
   setup() {
     const headers = ref([]);
     const data = ref([]);
+    const fileName = ref('');
     const defaultHeaderSets = ref([
       { name: 'Cliente', headers: ['ID do Cliente', 'Dia de vencimento', 'Razão social ou Nome completo', 'Nome fantasia', 'Pronuncia','Data de nascimento ou fundacao'
       ,'CNPJ','CPF','RG', 'Orgao expedidor','E-mail de financeiro','E-mail de recado','Telefone','Celular','DDR','Ramal exclusivo','Caixa postal',
@@ -89,9 +95,10 @@ export default {
         }
       });
     };
-
+  
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
+      fileName.value = file ? file.name : '';
       const reader = new FileReader();
       reader.onload = (e) => {
         const dataValue = new Uint8Array(e.target.result);
@@ -144,6 +151,7 @@ export default {
     return {
       headers,
       data,
+      fileName,
       defaultHeaders,
       mappings,
       handleFileUpload,
@@ -220,5 +228,148 @@ export default {
 .custom-select:focus {
   border-color: orange;
   box-shadow: 0 0 0 0.2rem rgba(255, 165, 0, 0.25);
+}
+.card {
+  border: none;
+  border-radius: 8px;
+}
+.card-header {
+  background-color: #000000;
+  color: white;
+  border-bottom: none;
+  padding: 1.5rem;
+}
+
+.custom-file {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin-bottom: 0;
+}
+
+.custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin: 0;
+  opacity: 0;
+}
+
+.custom-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.custom-file-label::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: block;
+  height: calc(1.5em + 0.75rem);
+  padding: 0.375rem 0.75rem;
+  line-height: 1.5;
+  color: #495057;
+  content: "Selecionar";
+  background-color: #e9ecef;
+  border-left: inherit;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: orange;
+  box-shadow: 0 0 0 0.2rem rgba(255, 165, 0, 0.25);
+}
+
+.card-header.bg-custom {
+  background: linear-gradient(to right, #ff6f00, #ff9e00);
+  color: #fff;
+}
+
+.card-header {
+  border-bottom: 0;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.col-form-label {
+  font-weight: 500;
+  color: #495057;
+}
+.form-control.custom-select {
+  border-radius: 0.375rem;
+  border-color: #ced4da;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+}
+
+.form-control.custom-select:focus {
+  border-color: #ff6f00;
+  box-shadow: 0 0 0 0.2rem rgba(255, 111, 0, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .col-sm-3,
+  .col-sm-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.form-control.custom-select {
+  border-radius: 0.375rem;
+  border-color: #ced4da;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+}
+
+.form-control.custom-select:focus {
+  border-color: #ff6f00;
+  box-shadow: 0 0 0 0.2rem rgba(255, 111, 0, 0.25);
+}
+
+option:disabled[selected] {
+  color: #6c757d;
+}
+
+@media (max-width: 767.98px) {
+  .form-group {
+    margin-bottom: 1rem;
+  }
+}
 }
 </style>
