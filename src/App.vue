@@ -1,7 +1,7 @@
 <template>
   <!-- <ImportOk /> -->
   <usecsv-button importerKey="1e9a7b85-e645-4f6c-99c4-f97485071ba3">
-    Importar Data
+    Importar Dados
   </usecsv-button>
 </template>
 
