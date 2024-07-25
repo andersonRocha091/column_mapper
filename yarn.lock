@@ -1394,6 +1394,22 @@
   dependencies:
     "@types/node" "*"
 
+"@usecsv/js@^0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@usecsv/js/-/js-0.29.3.tgz#e8fcd68e636ecd021b64beea38c5fa98c1353a39"
+  integrity sha512-2GPRpd13BGeqbXvnCJKhTz8CWg1Ti0xPBWUzm6NSz0Xq8swTcSuqNtjfq3oBjE94SaP1RMozZ/gAsDG6VfrkSA==
+  dependencies:
+    insert-css "^2.0.0"
+    penpal "^6.0.1"
+    when-dom-ready "^1.2.12"
+
+"@usecsv/vuejs3@^2.16.3":
+  version "2.16.3"
+  resolved "https://registry.yarnpkg.com/@usecsv/vuejs3/-/vuejs3-2.16.3.tgz#3f67d55a684ff564153529516c73be907721b81f"
+  integrity sha512-yEzcovE78W/XEx78F/Giy40nfKPbo9gQhTXB+PFWAOBVwvRvl3AouwM8y9X9Zc4XCn8YKe52EELpyHBzAQn0tQ==
+  dependencies:
+    "@usecsv/js" "^0.29.3"
+
 "@vue/babel-helper-vue-jsx-merge-props@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.4.0.tgz#8d53a1e21347db8edbe54d339902583176de09f2"
@@ -3961,6 +3977,11 @@ ini@~1.3.0:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
+insert-css@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/insert-css/-/insert-css-2.0.0.tgz#eb5d1097b7542f4c79ea3060d3aee07d053880f4"
+  integrity sha512-xGq5ISgcUP5cvGkS2MMFLtPDBtrtQPSFfC6gA6U8wHKqfjTIMZLZNxOItQnoSjdOzlXOLU/yD32RKC4SvjNbtA==
+
 ipaddr.js@1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
@@ -4997,6 +5018,11 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+penpal@^6.0.1:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/penpal/-/penpal-6.2.2.tgz#20a0a0592881a959e8c87116d854f9528b1aa601"
+  integrity sha512-RQD7hTx14/LY7QoS3tQYO3/fzVtwvZI+JeS5udgsu7FPaEDjlvfK9HBcme9/ipzSPKnrxSgacI9PI7154W62YQ==
 
 picocolors@^0.2.1:
   version "0.2.1"
@@ -6599,6 +6625,11 @@ whatwg-url@^5.0.0:
   dependencies:
     tr46 "~0.0.3"
     webidl-conversions "^3.0.0"
+
+when-dom-ready@^1.2.12:
+  version "1.2.12"
+  resolved "https://registry.yarnpkg.com/when-dom-ready/-/when-dom-ready-1.2.12.tgz#99f46f02ef65dbb2bb2f4b58c44588234e724c98"
+  integrity sha512-nEy7UvAylNMfOTTKE2c7QTFR2fyqTRaL/f+tuTpE4zU7iAF7Pk7aLmw6jZvhrwUTcK6pmnXFc0/N0Kzi/PHmEg==
 
 which@^1.2.9:
   version "1.3.1"
